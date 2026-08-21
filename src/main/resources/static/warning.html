@@ -1,159 +1,355 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>🚨 미등록 차량 조회</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f6f8;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 60px 20px;
-            margin: 0;
-        }
 
-        .container {
-            background-color: #ffffff;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            width: 600px;
-        }
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 24px;
-        }
+    <title>미등록 차량 조회</title>
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
+    <link
+            rel="stylesheet"
+            href="/style.css">
 
-        label {
-            font-weight: 500;
-            color: #444;
-        }
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        input[type="text"],
-        input[type="date"] {
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            width: 100%;
-        }
-
-        button {
-            padding: 12px;
-            font-size: 15px;
-            background-color: #2f80ed;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #1e5ec9;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            background-color: #ffeaea;
-            border-left: 6px solid crimson;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: #c0392b;
-        }
-
-        .no-warning {
-            color: gray;
-            text-align: center;
-            padding: 10px;
-        }
-    </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>📋 관리자 경고 조회</h1>
 
-    <form id="filterForm">
-        <label>차량번호
-            <input type="text" id="plateNumber" placeholder="예: 137하7288">
-        </label>
-        <label>위치
-            <input type="text" id="location" placeholder="예: A동 정문">
-        </label>
-        <label>날짜
-            <input type="date" id="date">
-        </label>
-        <button type="submit">🔍 검색</button>
-    </form>
 
-    <ul id="warningList"></ul>
-</div>
+<div id="header-container"></div>
+
+
+<main class="page">
+
+
+    <h1 class="page-title">
+        미등록 차량 조회
+    </h1>
+
+
+    <p class="page-description">
+        감지된 미등록 차량을 차량번호, 위치, 날짜로 조회합니다.
+    </p>
+
+
+    <section class="card">
+
+
+        <h2 class="card-title">
+            검색 조건
+        </h2>
+
+
+        <form id="filterForm">
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        차량번호
+                    </label>
+
+                    <input
+                            type="text"
+                            id="plateNumber"
+                            class="form-input"
+                            placeholder="예: 137하7288">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        위치
+                    </label>
+
+                    <input
+                            type="text"
+                            id="location"
+                            class="form-input"
+                            placeholder="예: A동 정문">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        날짜
+                    </label>
+
+                    <input
+                            type="date"
+                            id="date"
+                            class="form-input">
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="primary-btn">
+
+                <i class="bi bi-search"></i>
+
+                검색
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+    <section class="card">
+
+
+        <h2 class="card-title">
+            미등록 차량 감지 기록
+        </h2>
+
+
+        <ul
+                id="warningList"
+                class="data-list">
+        </ul>
+
+
+    </section>
+
+
+    <div class="button-area">
+
+
+        <button
+                class="back-btn"
+                onclick="location.href='/dashboard.html'">
+
+            <i class="bi bi-arrow-left"></i>
+
+            대시보드로
+
+        </button>
+
+
+    </div>
+
+
+</main>
+
+
+<script src="/common.js"></script>
+
 
 <script>
-    const token = localStorage.getItem("token");
+
+    const token =
+        localStorage.getItem("token");
+
+
     if (!token) {
-        alert("인증되지 않았습니다. 로그인 페이지로 이동합니다.");
-        location.href = "/login.html";
+
+        alert(
+            "인증되지 않았습니다. 로그인 페이지로 이동합니다."
+        );
+
+        location.href =
+            "/login.html";
+
     }
 
-    const form = document.getElementById("filterForm");
-    const list = document.getElementById("warningList");
+
+    const form =
+        document.getElementById("filterForm");
+
+
+    const list =
+        document.getElementById("warningList");
+
 
     form.onsubmit = async (e) => {
+
+
         e.preventDefault();
-        const plate = document.getElementById("plateNumber").value;
-        const locationVal = document.getElementById("location").value;
-        const date = document.getElementById("date").value;
 
-        const params = new URLSearchParams();
-        if (plate) params.append("plateNumber", plate);
-        if (locationVal) params.append("location", locationVal);
-        if (date) params.append("date", date);
 
-        const response = await fetch("/api/warning/filter?" + params.toString(), {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
+        const plate =
+            document
+                .getElementById("plateNumber")
+                .value
+                .trim();
+
+
+        const locationVal =
+            document
+                .getElementById("location")
+                .value
+                .trim();
+
+
+        const date =
+            document
+                .getElementById("date")
+                .value;
+
+
+        const params =
+            new URLSearchParams();
+
+
+        if (plate) {
+
+            params.append(
+                "plateNumber",
+                plate
+            );
+
+        }
+
+
+        if (locationVal) {
+
+            params.append(
+                "location",
+                locationVal
+            );
+
+        }
+
+
+        if (date) {
+
+            params.append(
+                "date",
+                date
+            );
+
+        }
+
+
+        const response =
+            await fetch(
+                "/api/warning/filter?"
+                + params.toString(),
+                {
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    }
+
+                }
+            );
+
 
         if (!response.ok) {
-            alert("⚠️ 인증 실패 또는 오류 발생");
+
+            alert(
+                "인증 실패 또는 오류가 발생했습니다."
+            );
+
             return;
         }
 
-        const data = await response.json();
+
+        const data =
+            await response.json();
+
+
         list.innerHTML = "";
+
+
         if (data.length === 0) {
-            list.innerHTML = "<li class='no-warning'>⚠️ 경고 없음</li>";
+
+            list.innerHTML = `
+
+                <li class="empty">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    조회된 미등록 차량이 없습니다.
+
+                </li>
+
+            `;
+
             return;
         }
+
 
         data.forEach(w => {
-            const li = document.createElement("li");
-            li.textContent = `🚨 ${w.plateNumber} @ ${w.location} (${w.timestamp})`;
+
+
+            const li =
+                document.createElement("li");
+
+
+            li.className =
+                "warning-item";
+
+
+            li.innerHTML = `
+
+                <div class="warning-number">
+
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    ${w.plateNumber}
+
+                </div>
+
+
+                <div class="warning-detail">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    ${w.location || "위치 정보 없음"}
+
+                    &nbsp; · &nbsp;
+
+                    <i class="bi bi-clock"></i>
+
+                    ${w.timestamp || "시간 정보 없음"}
+
+                </div>
+
+            `;
+
+
             list.appendChild(li);
+
+
         });
+
     };
 
-    // 페이지 로드시 자동 검색
-    form.dispatchEvent(new Event("submit"));
+
+    form.dispatchEvent(
+        new Event("submit")
+    );
+
 </script>
+
+
 </body>
+
 </html>
