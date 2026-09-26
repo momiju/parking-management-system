@@ -3,17 +3,19 @@
 #include <BLEServer.h>
 
 void setup() {
-  Serial.begin(115200);
-  BLEDevice::init("CAR_TAG");
+    Serial.begin(115200);
 
-  BLEServer *pServer = BLEDevice::createServer();
-  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
-  pAdvertising->start();
+    BLEDevice::init("CAR_TAG");
 
-  Serial.print("📡 광고 시작, MAC: ");
-  Serial.println(BLEDevice::getAddress().toString().c_str());
+    BLEDevice::createServer();
+
+    BLEAdvertising* advertising = BLEDevice::getAdvertising();
+    advertising->start();
+
+    Serial.print("📡 BLE 광고 시작 | MAC: ");
+    Serial.println(BLEDevice::getAddress().toString().c_str());
 }
 
 void loop() {
-  delay(1000);  // nothing to do
+    delay(1000);
 }
