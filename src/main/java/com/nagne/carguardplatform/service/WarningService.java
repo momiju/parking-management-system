@@ -1,13 +1,13 @@
 package com.nagne.carguardplatform.service;
 
 import com.nagne.carguardplatform.dto.WarningDto;
-import com.nagne.carguardplatform.entity.Warning;
 import com.nagne.carguardplatform.entity.Vehicle;
+import com.nagne.carguardplatform.entity.Warning;
 import com.nagne.carguardplatform.repository.VehicleRepository;
 import com.nagne.carguardplatform.repository.WarningRepository;
+import com.nagne.carguardplatform.util.WarningStreamManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.nagne.carguardplatform.util.WarningStreamManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,58 +20,144 @@ public class WarningService {
 
     private final WarningRepository warningRepository;
     private final VehicleRepository vehicleRepository;
+
+    // 미등록 차량 경고 생성
     public void issueWarning(WarningDto dto) {
-        // 등록된 차량이면 경고 기록 X
+
+        // 등록 차량이면 경고 생성하지 않음
         if (vehicleRepository.findById(dto.getPlateNumber())
                 .map(Vehicle::isRegistered)
                 .orElse(false)) {
-            throw new IllegalArgumentException("등록된 차량은 경고 대상이 아닙니다.");
+
+            throw new IllegalArgumentException(
+                    "등록된 차량은 경고 대상이 아닙니다."
+            );
         }
 
-        // 미등록 차량일 경우만 경고 저장
         Warning warning = new Warning();
+
         warning.setPlateNumber(dto.getPlateNumber());
-        warning.setLocation(dto.getLocation());
+        warning.setBleId(dto.getBleId());
+
+        // 입차 직후에는 아직 위치를 모름
+        warning.setLocation(null);
+
         warning.setTimestamp(LocalDateTime.now());
+
         warningRepository.save(warning);
 
-        // ✅ 실시간 알림 전송
-        WarningStreamManager.send("🚨 " + dto.getPlateNumber() + " 경고 발생 @ " + dto.getLocation());
-
+        // 미등록 차량 입차 알림
+        WarningStreamManager.send(
+                "warning",
+                "차량번호: " + dto.getPlateNumber()
+        );
     }
-    
+
+    public void updateTrackingLocation(
+            String bleId,
+            String location
+    ) {
+
+        if (bleId == null || bleId.isBlank()) {
+            throw new IllegalArgumentException(
+                    "BLE ID가 없습니다."
+            );
+        }
+
+        if (location == null || location.isBlank()) {
+            throw new IllegalArgumentException(
+                    "위치 정보가 없습니다."
+            );
+        }
+
+        Warning warning = warningRepository
+                .findTopByBleIdOrderByTimestampDesc(bleId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "해당 BLE 차량의 미등록 기록이 없습니다."
+                        )
+                );
+
+        String previousLocation =
+                warning.getLocation();
+
+        warning.setLocation(location);
+
+        warningRepository.save(warning);
+
+        // 위치가 처음 확인되었거나 변경된 경우만 알림
+        if (
+                previousLocation == null
+                        || !previousLocation.equals(location)
+        ) {
+
+            WarningStreamManager.send(
+                    "location",
+                    warning.getPlateNumber()
+                            + " · "
+                            + location
+            );
+        }
+    }
+
+    // 전체 경고 조회
     public List<WarningDto> findAllWarnings() {
         return warningRepository.findAll().stream()
                 .map(w -> {
                     WarningDto dto = new WarningDto();
-                    dto.setPlateNumber(w.getPlateNumber());
-                    dto.setLocation(w.getLocation());
-                    return dto;
-                })
-                .collect(Collectors.toList());
-    }
 
-    public List<WarningDto> filterWarnings(String plateNumber, String location, LocalDate date) {
-        return warningRepository.filterWarnings(plateNumber, location, date).stream()
-                .map(w -> {
-                    WarningDto dto = new WarningDto();
                     dto.setId(w.getId());
                     dto.setPlateNumber(w.getPlateNumber());
                     dto.setLocation(w.getLocation());
+
+                    dto.setTimestamp(
+                            w.getTimestamp() != null
+                                    ? w.getTimestamp().toString()
+                                    : null
+                    );
+
                     return dto;
                 })
                 .collect(Collectors.toList());
     }
 
-    public void confirmWarning(Long id) {
-        Warning warning = warningRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 경고가 존재하지 않습니다: " + id));
+    // 조건별 경고 조회
+    public List<WarningDto> filterWarnings(
+            String plateNumber,
+            String location,
+            LocalDate date
+    ) {
+        return warningRepository
+                .filterWarnings(plateNumber, location, date)
+                .stream()
+                .map(w -> {
+                    WarningDto dto = new WarningDto();
 
-        warning.setConfirmed(true);  // ✅ 확인 상태로 변경
-        warningRepository.save(warning);
+                    dto.setId(w.getId());
+                    dto.setPlateNumber(w.getPlateNumber());
+                    dto.setLocation(w.getLocation());
+
+                    dto.setTimestamp(
+                            w.getTimestamp() != null
+                                    ? w.getTimestamp().toString()
+                                    : null
+                    );
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
+    // 경고 확인 처리
+    public void confirmWarning(Long id) {
+        Warning warning = warningRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "해당 경고가 존재하지 않습니다: " + id
+                        )
+                );
+
+        warning.setConfirmed(true);
+        warningRepository.save(warning);
+    }
 }
-
-
-

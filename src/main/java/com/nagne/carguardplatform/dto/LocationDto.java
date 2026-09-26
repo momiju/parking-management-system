@@ -5,10 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WarningDto {
-    private Long id;
-    private String plateNumber;
+public class LocationDto {
     private String bleId;
     private String location;
-    private String timestamp;
 }

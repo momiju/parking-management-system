@@ -8,18 +8,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class WarningStreamManager {
 
-    private static final List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private static final List<SseEmitter> emitters =
+            new CopyOnWriteArrayList<>();
 
+    // SSE 연결 추가
     public static void add(SseEmitter emitter) {
         emitters.add(emitter);
         emitter.onCompletion(() -> emitters.remove(emitter));
         emitter.onTimeout(() -> emitters.remove(emitter));
     }
 
-    public static void send(String message) {
+    // SSE 이벤트 전송
+    public static void send(
+            String eventName,
+            String message
+    ) {
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(SseEmitter.event().name("warning").data(message));
+                emitter.send(SseEmitter.event().name(eventName).data(message));
             } catch (IOException e) {
                 emitter.complete();
                 emitters.remove(emitter);

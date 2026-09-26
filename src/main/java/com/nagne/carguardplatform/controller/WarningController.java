@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
+import com.nagne.carguardplatform.dto.LocationDto;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -61,5 +61,18 @@ public class WarningController {
         return ResponseEntity.ok("확인 처리 완료");
     }
 
+    @PostMapping("/location")
+    public ResponseEntity<String> updateLocation(
+            @RequestBody LocationDto dto
+    ) {
 
+        warningService.updateTrackingLocation(
+                dto.getBleId(),
+                dto.getLocation()
+        );
+
+        return ResponseEntity.ok(
+                "미등록 차량 위치 갱신 완료"
+        );
+    }
 }

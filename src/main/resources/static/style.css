@@ -43,7 +43,6 @@ body {
             sans-serif;
 
     background-color: var(--background);
-
     color: var(--text-main);
 }
 
@@ -67,10 +66,8 @@ input {
     padding: 0 28px;
 
     background-color: white;
-
     border-bottom: 1px solid var(--border);
 }
-
 
 .logo {
     display: flex;
@@ -79,14 +76,11 @@ input {
     gap: 8px;
 
     color: var(--text-main);
-
     text-decoration: none;
 
     cursor: pointer;
 }
 
-
-/* P 로고 박스 */
 .logo-icon {
     width: 34px;
     height: 34px;
@@ -98,7 +92,6 @@ input {
     border-radius: 10px;
 
     background-color: var(--primary-light);
-
     color: var(--primary);
 
     flex-shrink: 0;
@@ -111,36 +104,28 @@ input {
     line-height: 1;
 }
 
-
 .logo-text {
     font-size: 16px;
-
     font-weight: 700;
 
     letter-spacing: -0.3px;
-
     white-space: nowrap;
 }
-
 
 .logo:hover .logo-icon {
     transform: scale(1.03);
 }
 
-
 .logout-btn {
     padding: 7px 10px;
 
     border: none;
-
     border-radius: 7px;
 
     background-color: transparent;
-
     color: #687588;
 
     font-size: 12px;
-
     font-weight: 600;
 
     cursor: pointer;
@@ -148,17 +133,14 @@ input {
     transition: 0.2s;
 }
 
-
 .logout-btn i {
     margin-right: 4px;
 
     font-size: 13px;
 }
 
-
 .logout-btn:hover {
     color: var(--red);
-
     background-color: var(--red-light);
 }
 
@@ -169,30 +151,24 @@ input {
 
 .page {
     width: 100%;
-
     max-width: 1050px;
 
     margin: 0 auto;
-
     padding: 48px 24px 60px;
 }
-
 
 .page-small {
     max-width: 760px;
 }
 
-
 .page-title {
     margin: 0 0 8px;
 
     font-size: 27px;
-
     font-weight: 700;
 
     letter-spacing: -0.5px;
 }
-
 
 .page-description {
     margin: 0 0 30px;
@@ -211,17 +187,14 @@ input {
     margin-bottom: 30px;
 }
 
-
 .dashboard-title {
     margin: 0 0 8px;
 
     font-size: 29px;
-
     font-weight: 700;
 
     letter-spacing: -0.5px;
 }
-
 
 .dashboard-description {
     margin: 0;
@@ -231,27 +204,23 @@ input {
     font-size: 14px;
 }
 
-
 .dashboard-grid {
     display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
 }
 
-
 .dashboard-card {
     position: relative;
 
-    min-height: 205px;
+    min-height: 190px;
 
-    padding: 26px;
+    padding: 24px;
 
     background-color: white;
 
     border: 1px solid var(--border);
-
     border-radius: 15px;
 
     box-shadow:
@@ -265,7 +234,6 @@ input {
             border-color 0.2s ease;
 }
 
-
 .dashboard-card:hover {
     transform: translateY(-4px);
 
@@ -275,50 +243,35 @@ input {
             0 12px 28px rgba(36, 56, 80, 0.09);
 }
 
-
 .dashboard-card-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 
     border-radius: 12px;
 
-    font-size: 21px;
+    font-size: 20px;
 }
-
 
 .icon-blue {
     background-color: var(--primary-light);
-
     color: var(--primary);
 }
 
-
 .icon-green {
     background-color: var(--green-light);
-
     color: var(--green);
 }
 
-
 .icon-orange {
     background-color: var(--orange-light);
-
     color: var(--orange);
 }
-
-
-.icon-red {
-    background-color: var(--red-light);
-
-    color: var(--red);
-}
-
 
 .dashboard-card-content h2 {
     margin: 0 0 9px;
@@ -326,72 +279,19 @@ input {
     color: var(--text-main);
 
     font-size: 17px;
-
     font-weight: 700;
 
     letter-spacing: -0.2px;
 }
 
-
 .dashboard-card-content p {
     margin: 0;
-
-    max-width: 310px;
 
     color: var(--text-sub);
 
     font-size: 13px;
-
-    line-height: 1.65;
+    line-height: 1.6;
 }
-
-
-.dashboard-card-title-row {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-
-.dashboard-card-title-row h2 {
-    margin-bottom: 9px;
-}
-
-
-.card-live-status {
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    margin-bottom: 9px;
-
-    padding: 4px 7px;
-
-    border-radius: 20px;
-
-    background-color: var(--green-light);
-
-    color: var(--green);
-
-    font-size: 10px;
-
-    font-weight: 700;
-}
-
-
-.card-live-dot {
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background-color: var(--green);
-}
-
 
 .dashboard-card-arrow {
     position: absolute;
@@ -415,7 +315,6 @@ input {
     transition: 0.2s;
 }
 
-
 .dashboard-card:hover .dashboard-card-arrow {
     background-color: #f2f5f8;
 
@@ -435,23 +334,19 @@ input {
     background-color: white;
 
     border: 1px solid var(--border);
-
     border-radius: 13px;
 
     box-shadow: var(--shadow);
 }
 
-
 .card + .card {
     margin-top: 20px;
 }
-
 
 .card-title {
     margin: 0 0 20px;
 
     font-size: 17px;
-
     font-weight: 700;
 }
 
@@ -464,7 +359,6 @@ input {
     margin-bottom: 17px;
 }
 
-
 .form-label {
     display: block;
 
@@ -473,10 +367,8 @@ input {
     color: #485466;
 
     font-size: 13px;
-
     font-weight: 700;
 }
-
 
 .form-input {
     width: 100%;
@@ -484,11 +376,9 @@ input {
     padding: 11px 13px;
 
     border: 1px solid #d9e0e8;
-
     border-radius: 8px;
 
     background-color: white;
-
     color: var(--text-main);
 
     font-size: 14px;
@@ -498,11 +388,9 @@ input {
     transition: 0.2s;
 }
 
-
 .form-input::placeholder {
     color: #a5afbc;
 }
-
 
 .form-input:focus {
     border-color: #77a7d1;
@@ -511,10 +399,8 @@ input {
             0 0 0 3px rgba(55, 111, 163, 0.08);
 }
 
-
 .form-row {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
 
     gap: 14px;
@@ -529,15 +415,12 @@ input {
     padding: 10px 18px;
 
     border: none;
-
     border-radius: 8px;
 
     background-color: var(--primary);
-
     color: white;
 
     font-size: 13px;
-
     font-weight: 700;
 
     cursor: pointer;
@@ -545,16 +428,13 @@ input {
     transition: 0.2s;
 }
 
-
 .primary-btn i {
     margin-right: 5px;
 }
 
-
 .primary-btn:hover {
     background-color: var(--primary-dark);
 }
-
 
 .full-btn {
     width: 100%;
@@ -562,53 +442,42 @@ input {
     padding: 12px;
 }
 
-
 .back-btn {
     padding: 9px 15px;
 
     border: 1px solid var(--border);
-
     border-radius: 8px;
 
     background-color: white;
-
     color: #718095;
 
     font-size: 13px;
-
     font-weight: 600;
 
     cursor: pointer;
 
     transition: 0.2s;
 }
-
 
 .back-btn i {
     margin-right: 4px;
 }
 
-
 .back-btn:hover {
     background-color: #eef2f5;
-
     color: var(--text-main);
 }
-
 
 .delete-btn {
     padding: 7px 10px;
 
     border: 1px solid #f1cccc;
-
     border-radius: 7px;
 
     background-color: var(--red-light);
-
     color: var(--red);
 
     font-size: 12px;
-
     font-weight: 600;
 
     cursor: pointer;
@@ -616,17 +485,13 @@ input {
     transition: 0.2s;
 }
 
-
 .delete-btn:hover {
     background-color: var(--red);
-
     color: white;
 }
 
-
 .button-area {
     display: flex;
-
     justify-content: center;
 
     margin-top: 26px;
@@ -639,27 +504,22 @@ input {
 
 .data-list {
     margin: 0;
-
     padding: 0;
 
     list-style: none;
 }
 
-
 .data-item {
     min-height: 67px;
 
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
     padding: 12px 14px;
-
     margin-bottom: 9px;
 
     border: 1px solid var(--border);
-
     border-radius: 9px;
 
     background-color: white;
@@ -667,55 +527,44 @@ input {
     transition: 0.15s;
 }
 
-
 .data-item:last-child {
     margin-bottom: 0;
 }
 
-
 .data-item:hover {
     background-color: #fafbfd;
-
     border-color: #ced8e4;
 }
 
-
 .vehicle-info {
     display: flex;
-
     align-items: center;
 
     gap: 12px;
 }
-
 
 .vehicle-icon {
     width: 40px;
     height: 40px;
 
     display: flex;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     flex-shrink: 0;
 
     border-radius: 9px;
 
     background-color: var(--primary-light);
-
     color: var(--primary);
 
     font-size: 17px;
 }
 
-
 .vehicle-number {
     font-size: 15px;
-
     font-weight: 700;
 }
-
 
 .vehicle-sub {
     margin-top: 3px;
@@ -723,6 +572,42 @@ input {
     color: var(--text-sub);
 
     font-size: 12px;
+}
+
+
+/* =========================
+   차량 등록 상태
+========================= */
+
+.vehicle-title-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 3px 8px;
+
+    border-radius: 12px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status-registered {
+    background-color: var(--green-light);
+    color: var(--green);
+}
+
+.status-unregistered {
+    background-color: var(--red-light);
+    color: var(--red);
 }
 
 
@@ -736,23 +621,18 @@ input {
     padding: 15px 16px;
 
     border: 1px solid #f0d1ce;
-
     border-left: 4px solid var(--red);
-
     border-radius: 9px;
 
     background-color: #fffafa;
 }
 
-
 .warning-item:last-child {
     margin-bottom: 0;
 }
 
-
 .warning-number {
     display: flex;
-
     align-items: center;
 
     gap: 7px;
@@ -762,10 +642,8 @@ input {
     color: #a94d4d;
 
     font-size: 14px;
-
     font-weight: 700;
 }
-
 
 .warning-detail {
     color: #7a6767;
@@ -782,7 +660,6 @@ input {
     padding: 38px 20px;
 
     border: 1px dashed #d9e0e8;
-
     border-radius: 9px;
 
     color: #9aa5b3;
@@ -791,7 +668,6 @@ input {
 
     font-size: 13px;
 }
-
 
 .empty i {
     display: block;
@@ -812,7 +688,6 @@ input {
     min-height: 100vh;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -827,13 +702,10 @@ input {
             #f5f7f9;
 }
 
-
 .login-wrapper {
     width: 100%;
-
     max-width: 390px;
 }
-
 
 .login-logo {
     margin-bottom: 24px;
@@ -841,13 +713,11 @@ input {
     text-align: center;
 }
 
-
 .login-logo-icon {
     width: 56px;
     height: 56px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -856,7 +726,6 @@ input {
     border-radius: 14px;
 
     background-color: var(--primary-light);
-
     color: var(--primary);
 
     font-size: 26px;
@@ -866,7 +735,6 @@ input {
     line-height: 1;
 }
 
-
 .login-logo h1 {
     margin: 0 0 6px;
 
@@ -874,7 +742,6 @@ input {
 
     letter-spacing: -0.4px;
 }
-
 
 .login-logo p {
     margin: 0;
@@ -884,12 +751,10 @@ input {
     font-size: 13px;
 }
 
-
 .login-card {
     padding: 30px;
 
     border: 1px solid var(--border);
-
     border-radius: 14px;
 
     background-color: white;
@@ -897,7 +762,6 @@ input {
     box-shadow:
             0 14px 38px rgba(25, 45, 70, 0.08);
 }
-
 
 #message {
     min-height: 18px;
@@ -911,56 +775,13 @@ input {
 
 
 /* =========================
-   SSE
+   태블릿
 ========================= */
 
-.status-bar {
-    display: flex;
+@media (max-width: 1000px) {
 
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 10px 13px;
-
-    margin-bottom: 20px;
-
-    border-radius: 8px;
-
-    background-color: var(--green-light);
-
-    color: var(--green);
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-
-.status-dot {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background-color: var(--green);
-
-    animation: pulse 1.5s infinite;
-}
-
-
-@keyframes pulse {
-
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
-
-    100% {
-        opacity: 1;
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -977,11 +798,9 @@ input {
         padding: 0 16px;
     }
 
-
     .logo {
         gap: 5px;
     }
-
 
     .logo-icon {
         width: 30px;
@@ -994,11 +813,9 @@ input {
         font-size: 19px;
     }
 
-
     .logo-text {
         font-size: 14px;
     }
-
 
     .logout-btn {
         padding: 6px 8px;
@@ -1006,36 +823,29 @@ input {
         font-size: 11px;
     }
 
-
     .logout-btn i {
         font-size: 12px;
     }
-
 
     .page {
         padding: 34px 18px 50px;
     }
 
-
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
-
 
     .dashboard-card {
         min-height: 190px;
     }
 
-
     .form-row {
         grid-template-columns: 1fr;
     }
 
-
     .dashboard-title {
         font-size: 26px;
     }
-
 
     .page-title {
         font-size: 24px;

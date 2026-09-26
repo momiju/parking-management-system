@@ -2,19 +2,19 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/guard_db?serverTimezone=Asia/Seoul
     username: root
-    password: root3306
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: update   # 또는 create / create-drop (테스트용)
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
 jwt:
-  secret: thisisaverysecurekeythatyoustoreexternally123!
-  expiration: 3600000 # 1시간 (단위: 밀리초)
+  secret: ${JWT_SECRET}
+  expiration: 3600000
 
 server:
   port: 8080

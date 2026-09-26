@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WarningDto {
-    private Long id;
+public class VehicleEntryDto {
+
     private String plateNumber;
+
+    // 차량을 구분하기 위한 BLE 식별자
     private String bleId;
-    private String location;
-    private String timestamp;
 }
